@@ -7,7 +7,3 @@ Responsive ReactJS web app made with HTML, CSS, and JavaScript. Allows users to 
 - Download and clone repository
 - run ```npm install``` in project folder
 - run ```npm start``` to preview app
-
-# Resource
-
-    API: https://www.themoviedb.org/
