@@ -2,10 +2,6 @@
 
 Responsive ReactJS web app made with HTML, CSS, and JavaScript. Allows users to rate and save movies they have seen. Uses TMDB API for movie data. Currently working on implementing OpenAI API to provide movie recommendations based on the ratings of your watched movie list.
 
-# Demo
-
-
-
 # Set-up
 
 - Download and clone repository
