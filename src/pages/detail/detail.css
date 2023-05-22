@@ -1,0 +1,141 @@
+
+.movie-backdrop {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-position: center;
+    background-size:100%;
+}
+.movieDetails {
+    display: grid;
+    gap: 15px;
+    z-index: 1;
+    grid-template-columns: auto auto;
+    max-width: 1152px;
+    min-width: 370px;
+    padding-bottom: 20px;
+    margin: 40px 15px 0px 15px;
+}
+.moreInfo{
+    color: white;
+}
+
+.background-filter {
+    transform: scale(1.1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.detailPoster {
+    max-width: 280px;
+    min-width: 150px;
+}
+
+.detailPoster>img {
+    border-radius: 10px;
+    width: 100%;
+}
+
+.movieDesc {
+    display: block;
+    color: white;
+    font-size: 110%;
+}
+
+.movieDesc>h1 {
+    margin-bottom: 10px;
+    font-size: 3em;
+}
+
+.movieDesc>p {
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+.genreTag {
+    color: white;
+    text-decoration: none;
+    border: 1px solid;
+    border-radius: 15px;
+    padding: 5px 15px 5px 15px;
+    margin-left: 5px;
+    font-size: 0.9em;
+}
+
+.genreTag:hover {
+    color: #5da9ff;
+    transition: color 0.3s;
+    border: 1px solid;
+}
+
+
+/* movie details and user controls */
+.movieOptions{
+    padding-top: 2%;
+    height: fit-content;
+}
+.movieOptions > button{
+    font-size: 0.8em;
+    font-family: "Montserrat";
+    background: none;
+    color: white;
+    text-decoration: none;
+    border: 1px solid;
+}
+.movieOptions > button:hover{
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.removeButton{
+    padding: 5px 10px 5px 10px;
+}
+.removeButton:hover{
+    color: #ff6464;
+    box-shadow: 0px 0px 10px 1px;
+}
+.addButton{
+    padding: 5px 10px 5px 10px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+.addButton:hover{
+    color: #5da9ff;
+}
+
+@media only screen and (max-width: 1050px) {
+    .movieDetails {
+        font-size: 90%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .movieDetails {
+        font-size: 80%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .genreTag {
+        font-size: 0.8em;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .movieDetails {
+        font-size: 60%;
+    }
+}
