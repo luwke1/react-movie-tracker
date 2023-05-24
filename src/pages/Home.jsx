@@ -26,8 +26,10 @@ const Home = () => {
         getMovies();
     }
     const previousPage = () => {
-        page-=1;
-        getMovies();
+        if (page > 1){
+            page-=1;
+            getMovies();
+        }
     }
 
     const handleKeyDown = (event) => {
