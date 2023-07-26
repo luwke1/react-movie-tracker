@@ -91,7 +91,6 @@
     font-size: 0.8em;
     font-family: "Montserrat";
     background: none;
-    color: white;
     text-decoration: none;
     border: 1px solid;
 }
@@ -100,19 +99,38 @@
     transition: all 0.3s;
 }
 .removeButton{
+    color: #ff6464;
     padding: 5px 10px 5px 10px;
 }
 .removeButton:hover{
-    color: #ff6464;
     box-shadow: 0px 0px 10px 1px;
 }
 .addButton{
     padding: 5px 10px 5px 10px;
+    color: #5da9ff;
     border-radius: 50%;
     margin-left: 5px;
 }
 .addButton:hover{
     color: #5da9ff;
+    box-shadow: 0px 0px 10px 1px;
+}
+
+.addWatchlist{
+    padding: 5px 10px 5px 10px;
+    color: white;
+}
+.addWatchlist:hover{
+    box-shadow: 0px 0px 10px 1px;
+}
+
+.removeWatchlist{
+    color: #ff6464;
+    border-radius: 15px;
+    padding: 5px 10px 5px 10px;
+}
+.removeWatchlist:hover{
+    box-shadow: 0px 0px 10px 1px;
 }
 
 @media only screen and (max-width: 1050px) {

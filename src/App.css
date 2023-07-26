@@ -28,7 +28,7 @@ body {
     text-decoration: none;
     color: white;
     height: 100%;
-    width: 90px;
+    padding: 0px 15px 0px 15px;
     align-self: center;
     justify-content: center;
     align-items: center;
@@ -145,6 +145,37 @@ body {
     right: 5px;
 }
 
+/* -------RECOMMEND CARDS--------- */
+.recCard{
+    padding-bottom: 5px;
+    border-bottom: 1px dashed white;
+    margin-bottom: 10px;
+    width: 60%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+.recPoster:hover{
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 1px white;
+}
+.recPoster > img{
+    width: 85px;
+}
+.recDesc{
+    color: white;
+    margin-left: 15px;
+}
+.recDesc > h3{
+    cursor: pointer;
+    
+}
+.recDesc > h3:hover{
+    transition: color 0.2s;
+    color:#5da9ff;
+    
+}
+
 /* change page section */
 .pageSection{
     text-align: center;
@@ -162,4 +193,17 @@ body {
 .pageSection > div>  button:hover{
     color: #5da9ff;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .searchArea{
+        grid-template-columns: 400px 1fr;
+        width: 440px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .recCard{
+        width: 90%;
+    }
 }

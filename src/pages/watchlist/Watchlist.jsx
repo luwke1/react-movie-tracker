@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import './profile.css'
+
+import addIcon from '../../plus-square.svg'
+
+import './watchlist.css'
 import api from '../../api/apiConfig'
 import MovieCard from '../../components/MovieCard';
 
-let profile = JSON.parse(localStorage.getItem("profile"));
-
-const Profile = () => {
+const Collection = () => {
     const [movies, setMovies] = useState([]);
-    
+    let profile = JSON.parse(localStorage.getItem("profile"));
 
     const getWatched = async () => {
         try {
             // Create an array of promises for each movie in the profile
-            const moviePromises = Object.keys(profile.movies).map(async (key) => {
+            const moviePromises = Object.keys(profile.watchlist).map(async (key) => {
                 const response = await fetch(`https://api.themoviedb.org/3/movie/${key}?api_key=${api.apiKey}`);
                 const data = await response.json();
-                data["user_rating"] = profile.movies[key]["user_rating"]
                 return data;
             });
 
@@ -35,9 +35,16 @@ const Profile = () => {
     return (
         <div className='profileBody'>
             <div className='profileSec'>
-                    <div>
-                        <h1>{`Your Watched Movies`}</h1>
-                    </div>
+                <div>
+                    <h1>Your Watchlist</h1>
+                    {/* <div class="dropdown">
+                        <button class="dropbtn"><img src={addIcon}/></button>
+                        <div class="dropdown-content">
+                            <a href="#" onClick={createCollection}>Custom</a>
+                            <a href="#">By prompt</a>
+                        </div>
+                    </div> */}
+                </div>
             </div>
             <div className='movieSection'>
                 {
@@ -49,7 +56,7 @@ const Profile = () => {
                             })
                         ) : (
                             <div className='empty'>
-                                <h2>No movies found in watched</h2>
+                                <h2>No movies found in your watchlist</h2>
                             </div>
                         )
                 }
@@ -58,6 +65,4 @@ const Profile = () => {
     );
 }
 
-
-
-export default Profile;
+export default Collection;
