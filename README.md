@@ -1,4 +1,4 @@
-# react-movie-helper
+# react-movie-tracker
 
 * NOTE: This react app cannot be built and tested without API keys, which can be setup in the "api" folder
 
