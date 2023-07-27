@@ -38,6 +38,7 @@ const Search = () => {
     const handleKeyDown = (event) => {
         if (event.key === 'Enter' || event.target.className === "icons") {
             navigate("/search/"+searchTerm);
+            navigate(0);
         }
     }
 
