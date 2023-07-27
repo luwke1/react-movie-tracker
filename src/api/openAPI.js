@@ -1,5 +1,5 @@
 const openApiConfig = {
-    apiKey: 'OPENAI API KEY GOES HERE',
+    apiKey: 'OPENAI API KEY HERE',
 }
 
 export default openApiConfig;

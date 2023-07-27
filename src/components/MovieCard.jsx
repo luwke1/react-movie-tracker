@@ -20,7 +20,7 @@ const MovieCard = ({movie, user_rating=false})=>{
     
 
     const loadDetails = () => {
-        navigate("/details/"+movie.id)
+        navigate("/details/"+movie.id);
     }
 
     return (

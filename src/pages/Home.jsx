@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import searchIcon from '../search.svg'
 import MovieCard from '../components/MovieCard';
 import api from '../api/apiConfig';
 let page = 1;
 
 const Home = () => {
+    const navigate = useNavigate();
     const [movies, setMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
 
     const getMovies = async () => {
         const response = await fetch(`${api.baseUrl}movie/popular?api_key=${api.apiKey}&page=${page}`)
-        const data = await response.json();
-        setMovies(data.results)
-    }
-
-    const searchMovie = async (searchName) => {
-        const response = await fetch(`${api.baseUrl}search/movie?api_key=${api.apiKey}&query=${searchName}`)
         const data = await response.json();
         setMovies(data.results)
     }
@@ -33,9 +29,9 @@ const Home = () => {
     }
 
     const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            searchMovie(searchTerm)
-          }
+        if (event.key === 'Enter' || event.target.className === "icons") {
+            navigate("/search/"+searchTerm);
+        }
     }
 
     useEffect(() => {
@@ -50,7 +46,7 @@ const Home = () => {
     <div className='searchMain'>
         <div className='searchArea'>
             <div><input placeholder='Search movie' value={searchTerm} onKeyDown={handleKeyDown} onChange={(e) => { setSearchTerm(e.target.value) }} /></div>
-            <div><img width='40px' height='40px' className='icons' src={searchIcon} alt="search" onClick={() => { searchMovie(searchTerm) }} /></div>
+            <div><img width='40px' height='40px' className='icons' src={searchIcon} alt="search" onClick={handleKeyDown} /></div>
         </div>
     </div>
     <div className='movieSection'>
