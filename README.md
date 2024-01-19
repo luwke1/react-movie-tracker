@@ -14,3 +14,9 @@ Users can also get recommended movies. They can put in a prompt like "list actio
 - Download and clone repository
 - run ```npm install``` in project folder
 - run ```npm start``` to preview app
+
+# Video Demo Link
+
+Here's a short demo video that showcases basic app navigation and features. Also shows how to generate smart movie recommendations based on a prompt.
+
+https://www.youtube.com/watch?v=0GOGcFymtNM
