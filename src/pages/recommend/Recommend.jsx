@@ -48,24 +48,32 @@ const Collection = () => {
     // Makes a call to OpenAI API to generate movie recommendations based on the user prompt.
     // It will forcefully return JSON code that I can use to get movie details on TMDB API
     async function generateMovies(prompt) {
-        searchDisplay = "none";
-        loadDisplay = "grid";
-        setDisabled(true);
-        const completion = await openai.createChatCompletion({
-            model: "gpt-3.5-turbo",
-            messages: [
-                {
-                    role: "system",
-                    content: "You are a movie recommendation assistant that only speaks JSON, you will list 15 movies to the best of your ability based on user prompt and return JSON in the format of the movies title, release date, and non-spoiler description of why it fits. Do not write normal text"
-                },
-                { role: "user", content: prompt }
-            ]
-        })
-        searchDisplay = "grid";
-        loadDisplay = "none";
-        setDisabled(false);
-        console.log(completion.data.choices[0]);
-        getAllMovies(JSON.parse(completion.data.choices[0].message.content))
+        try {
+            searchDisplay = "none";
+            loadDisplay = "grid";
+            setDisabled(true);
+            
+            const completion = await openai.createChatCompletion({
+                model: "gpt-3.5-turbo",
+                messages: [
+                    {
+                        role: "system",
+                        content: "You are a movie recommendation assistant that only speaks JSON. List 15 movies based on the user prompt and return JSON in the format of the movie's title, release date, and non-spoiler description of why it fits. Do not write normal text."
+                    },
+                    { role: "user", content: prompt }
+                ]
+            });
+
+            const movieData = JSON.parse(completion.data.choices[0].message.content);
+            await getAllMovies(movieData);
+        } catch (error) {
+            console.error("Error generating movies:", error);
+            // Handle the error appropriately (e.g., show an error message to the user)
+        } finally {
+            searchDisplay = "grid";
+            loadDisplay = "none";
+            setDisabled(false);
+        }
     }
     
     useEffect(() => {
