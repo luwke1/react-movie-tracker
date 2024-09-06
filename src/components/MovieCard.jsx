@@ -17,6 +17,8 @@ const MovieCard = ({movie, user_rating=false})=>{
     }else{
         color = "orange"
     }
+
+    console.log(movie);
     
 
     const loadDetails = () => {

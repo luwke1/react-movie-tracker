@@ -5,24 +5,33 @@ import './detail.css'
 var profile = JSON.parse(localStorage.getItem("profile"));
 
 const Detail = () => {
+	// Extract the movie ID from URL parameters
 	const { id } = useParams();
+
+	// Create state to store movie data
 	const [movieData, setData] = useState({});
 	const [movies, setMovies] = useState(profile.movies);
 
+	// Fetch movie details from API
 	useEffect(() => {
 		getDetails();
 	}, []);
 
+	// Function to fetch movie details from API
 	const getDetails = async () => {
-		const response = await fetch(`${api.baseUrl}/movie/${id}?api_key=` + api.apiKey)
+		const response = await fetch(`${api.baseUrl}movie/${id}?api_key=` + api.apiKey)
 		const data = await response.json();
 		setData(data)
 	}
+
+	// Function to add a movie to the user's watched list
 	async function addMovie(rating) {
 		profile.movies[movieData.id] = { title: movieData.title, release_date: movieData.release_date, user_rating: rating }
 		localStorage.setItem("profile", JSON.stringify(profile));
 		setMovies([1])
 	}
+
+	// Function to remove a movie from the user's watched list
 	async function removeMovie() {
 		if (profile.movies.hasOwnProperty(movieData.id)) {
 			delete profile.movies[movieData.id]
@@ -30,6 +39,8 @@ const Detail = () => {
 			setMovies([1])
 		}
 	}
+
+	// Function to remove a movie from the user's watchlist
 	async function removeFromWatchlist() {
 		if (profile.watchlist.hasOwnProperty(movieData.id)) {
 			delete profile.watchlist[movieData.id]
@@ -37,12 +48,15 @@ const Detail = () => {
 			setMovies([1])
 		}
 	}
+
+	// Function to add a movie to the user's watchlist
 	async function addToWatchlist() {
 		profile.watchlist[movieData.id] = { title: movieData.title, release_date: movieData.release_date }
 		localStorage.setItem("profile", JSON.stringify(profile));
 		setMovies([1])
 	}
 
+	// Render the movie details page
 
 	return (
 		<>
