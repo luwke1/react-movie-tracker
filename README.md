@@ -1,6 +1,6 @@
 # react-movie-tracker
 
-* NOTE: This react app cannot be built and tested without API keys, which can be setup in the "api" folder
+* NOTE: This react app cannot be built and tested without OpenAI API keys, which can be setup in the "api" folder
 
 Responsive ReactJS web app made with HTML, CSS, and JavaScript. Allows users to rate and save movies they have seen. Uses TMDB API for movie data and OpenAI API for smart movie recommendations.
 
@@ -10,7 +10,7 @@ Users can also get recommended movies. They can put in a prompt like "list actio
 
 # Set-up
 
-- Setup API keys in "api" folder
+- Setup API key in "api" folder
 - Download and clone repository
 - run ```npm install``` in project folder
 - run ```npm start``` to preview app
