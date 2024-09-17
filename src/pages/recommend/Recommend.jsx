@@ -55,7 +55,6 @@ const Collection = () => {
             searchDisplay = "none";
             loadDisplay = "grid";
             setDisabled(true);
-            console.log("HELLOOO")
             
             // Make API call to OpenAI
             const completion = await openai.createChatCompletion({
@@ -93,7 +92,6 @@ const Collection = () => {
     const handleKeyDown = (event) => {
         const VALID_CHARS = /^[A-Za-z ]+$/
         if (event.key === 'Enter') {
-            console.log("hello")
             let prompt = event.target.value
             if (prompt.length > 5) {
                 generateMovies(prompt);
