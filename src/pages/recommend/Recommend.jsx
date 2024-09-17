@@ -9,21 +9,24 @@ import sendIcon from '../../send-fill.svg'
 import './recommend.css'
 import RecommendCard from '../../components/RecommendCard';
 
+// Initialize OpenAI API
 const openai = new OpenAIApi(new Configuration({
     apiKey: openapi.apiKey
 }))
 
+// Variables to control display of search and loading elements
 let searchDisplay = "grid";
 let loadDisplay = "none";
 
 const Collection = () => {
-    const [watchlist, setWatchlist] = useState([]);
+    // State variables
     const [recs, setRecs] = useState({});
     const [disabled, setDisabled] = useState(false);
+
+    // Get user profile from local storage
     let profile = JSON.parse(localStorage.getItem("profile"));
 
-    // Used once openAI API returns a JSON of all the movie recommendations
-    // This will fetch movie data from TMDB API for each movie in the JSON and save to local storage
+    // Function to fetch movie data from TMDB API for each recommended movie
     async function getAllMovies(movieJSON) {
         try {
             // Create an array of promises for each movie in the JSON
@@ -35,7 +38,7 @@ const Collection = () => {
                     return data.results[0];
                 }
             });
-            // Waits for all promises to resolve and sets the data
+            // Wait for all promises to resolve and set the data
             const movieData = await Promise.all(moviePromises);
             profile.recommended = movieData;
             localStorage.setItem("profile", JSON.stringify(profile));
@@ -45,14 +48,16 @@ const Collection = () => {
         }
     }
 
-    // Makes a call to OpenAI API to generate movie recommendations based on the user prompt.
-    // It will forcefully return JSON code that I can use to get movie details on TMDB API
-    async function generateMovies(prompt) {
+    // Function to generate movie recommendations using OpenAI API
+    async function generateMovies(prompt, retries = 0) {
         try {
+            // Update UI to show loading state
             searchDisplay = "none";
             loadDisplay = "grid";
             setDisabled(true);
+            console.log("HELLOOO")
             
+            // Make API call to OpenAI
             const completion = await openai.createChatCompletion({
                 model: "gpt-4o-mini",
                 messages: [
@@ -64,27 +69,31 @@ const Collection = () => {
                 ]
             });
 
+            // Parse the response and fetch movie details
             const movieData = JSON.parse(completion.data.choices[0].message.content);
             await getAllMovies(movieData);
         } catch (error) {
             console.error("Error generating movies:", error);
-            // Handle the error appropriately (e.g., show an error message to the user)
         } finally {
+            // Reset UI state
             searchDisplay = "grid";
             loadDisplay = "none";
             setDisabled(false);
         }
     }
     
+    // Load recommendations from profile on component mount
     useEffect(() => {
         if (Object.keys(profile.recommended).length > 1) {
             setRecs(profile.recommended);
         }
     }, []);
 
+    // Handle user input in the search field
     const handleKeyDown = (event) => {
         const VALID_CHARS = /^[A-Za-z ]+$/
         if (event.key === 'Enter') {
+            console.log("hello")
             let prompt = event.target.value
             if (prompt.length > 5) {
                 generateMovies(prompt);
@@ -102,6 +111,7 @@ const Collection = () => {
                 </div>
             </div>
             <div className='recSection'>
+                {/* Loading animation */}
                 <div style={{display: loadDisplay}} class="center">
                     <div class="wave"></div>
                     <div class="wave"></div>
@@ -114,25 +124,24 @@ const Collection = () => {
                     <div class="wave"></div>
                     <div class="wave"></div>
                 </div>
+                {/* Search input */}
                 <div style={{display: searchDisplay}} className='searchArea'>
                     <div><input disabled={disabled} minLength={5} maxLength={80} placeholder='ex: list action movies that have dogs as the main character' onKeyDown={handleKeyDown} /></div>
                     <div><img width='30px' height='40px' className='icons' src={sendIcon} alt="search" /></div>
                 </div>
             </div>
             <div className='recSection'>
-
-                {
-
-                    recs.length > 0
-                        ? (
-                            recs.map((movie) => {
-                                if (movie) {
-                                    return <RecommendCard movie={movie} />
-                                }
-                            })
-                        ) : (
-                            <p></p>
-                        )
+                {recs.length > 0
+                    ? (
+                        recs.map((movie) => {
+                            if (movie) {
+                                return <RecommendCard key={movie.id} movie={movie} />
+                            }
+                            return null;
+                        })
+                    ) : (
+                        <p></p>
+                    )
                 }
             </div>
         </div>
